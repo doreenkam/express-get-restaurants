@@ -18,6 +18,17 @@ app.get('/restaurants/:id', async (req, res) => {
   res.send(data);
 });
 
+app.post('/restaurants', async (req, res) => {
+  const data = await Restaurant.create({
+    name: req.body.name,
+    location: req.body.location,
+    cuisine: req.body.cuisine,
+  });
+  res.send(data);
+});
+app.put('/restaurants/:id', (req, res) => {});
+app.delete('/restaurants/:id', (req, res) => {});
+
 app.listen(port, () => {
   sequelize.sync();
   console.log('Your server is listening on port ' + port);

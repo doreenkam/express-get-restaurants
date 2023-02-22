@@ -32,7 +32,12 @@ app.put('/restaurants/:id', async (req, res) => {
   res.send(data);
 });
 
-app.delete('/restaurants/:id', (req, res) => {});
+app.delete('/restaurants/:id', async (req, res) => {
+  const id = req.params.id;
+  await Restaurant.destroy({ where: { id } });
+  const remainder = await Restaurant.findAll();
+  res.send('Restaurant Deleted!');
+});
 
 app.listen(port, () => {
   sequelize.sync();

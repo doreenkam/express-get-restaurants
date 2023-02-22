@@ -19,14 +19,19 @@ app.get('/restaurants/:id', async (req, res) => {
 });
 
 app.post('/restaurants', async (req, res) => {
-  const data = await Restaurant.create({
-    name: req.body.name,
-    location: req.body.location,
-    cuisine: req.body.cuisine,
-  });
+  const data = await Restaurant.create(req.body);
   res.send(data);
 });
-app.put('/restaurants/:id', (req, res) => {});
+
+app.put('/restaurants/:id', async (req, res) => {
+  const id = req.params.id;
+  await Restaurant.update(req.body, {
+    where: { id },
+  });
+  const data = await Restaurant.findByPk(id);
+  res.send(data);
+});
+
 app.delete('/restaurants/:id', (req, res) => {});
 
 app.listen(port, () => {

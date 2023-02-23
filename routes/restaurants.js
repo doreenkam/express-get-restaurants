@@ -23,11 +23,7 @@ router.get('/:id', async (req, res) => {
 router.post(
   '/',
   [
-    check('name', 'Name is required')
-      .not()
-      .isEmpty()
-      .trim()
-      .isLength([{ min: 10, max: 30 }]),
+    check('name', 'Name is required').not().isEmpty().trim(),
     check('name', 'Name length is invalid').isLength({ min: 10, max: 30 }),
     check('location', 'Location is required').not().isEmpty().trim(),
     check('cuisine', 'Cuisine is required').not().isEmpty().trim(),
